@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>孕期健康饮食指南 - 长胎不长肉</title>
+    <title>孕期健康与家庭管理指南</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -54,8 +54,8 @@
             padding: 0 10px;
         }
         
-        /* 餐时导航 - 移动端优化 */
-        .meal-nav {
+        /* 主分类导航 - 移动端优化 */
+        .main-nav {
             display: flex;
             justify-content: center;
             flex-wrap: nowrap; /* 移动端不换行 */
@@ -66,21 +66,65 @@
             -webkit-overflow-scrolling: touch; /* 移动端平滑滚动 */
         }
         
-        .meal-nav::-webkit-scrollbar {
+        .main-nav::-webkit-scrollbar {
             display: none; /* 隐藏滚动条 */
         }
         
-        .meal-tab {
+        .main-tab {
             background-color: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px; /* 移动端减小内边距 */
+            padding: 10px 20px; /* 移动端减小内边距 */
             border-radius: 25px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
             border: 2px solid transparent;
-            font-size: 0.9rem; /* 移动端减小字体大小 */
+            font-size: 1rem; /* 移动端减小字体大小 */
             white-space: nowrap; /* 防止文字换行 */
             flex-shrink: 0; /* 防止按钮收缩 */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .main-tab:hover, .main-tab.active {
+            background-color: white;
+            color: #ff6699;
+            border-color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 餐时导航 - 仅在孕期饮食中显示 */
+        .meal-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: 8px;
+            margin-top: 20px;
+            overflow-x: auto;
+            padding: 0 10px 10px;
+            -webkit-overflow-scrolling: touch;
+            display: none; /* 默认隐藏 */
+        }
+        
+        .meal-nav.active {
+            display: flex; /* 激活时显示 */
+        }
+        
+        .meal-nav::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .meal-tab {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .meal-tab:hover, .meal-tab.active {
@@ -90,14 +134,14 @@
             transform: translateY(-2px);
         }
         
-        /* 餐时内容区域 */
-        .meal-section {
+        /* 分类内容区域 */
+        .main-section {
             display: none;
             margin-bottom: 30px;
             animation: fadeIn 0.8s ease;
         }
         
-        .meal-section.active {
+        .main-section.active {
             display: block;
         }
         
@@ -301,6 +345,199 @@
             font-size: 0.9rem; /* 移动端减小字体大小 */
         }
         
+        /* 家庭应急药物样式 */
+        .medicine-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .medicine-card {
+            background-color: #f0f9ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #66ccff;
+            transition: transform 0.3s ease;
+        }
+        
+        .medicine-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .medicine-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #0099cc;
+            font-weight: 600;
+        }
+        
+        .medicine-header i {
+            margin-right: 8px;
+        }
+        
+        .medicine-content {
+            font-size: 0.9rem;
+        }
+        
+        .medicine-content p {
+            margin-bottom: 8px;
+        }
+        
+        .medicine-warning {
+            background-color: #fff0f0;
+            border-left: 3px solid #ff6666;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+        
+        /* 家庭百科全书样式 */
+        .encyclopedia-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .encyclopedia-card {
+            background-color: #f9f0ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #9966cc;
+            transition: transform 0.3s ease;
+        }
+        
+        .encyclopedia-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .encyclopedia-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #663399;
+            font-weight: 600;
+        }
+        
+        .encyclopedia-header i {
+            margin-right: 8px;
+        }
+        
+        .encyclopedia-content {
+            font-size: 0.9rem;
+        }
+        
+        .encyclopedia-content p {
+            margin-bottom: 8px;
+        }
+        
+        .encyclopedia-tip {
+            background-color: #f0fff0;
+            border-left: 3px solid #66cc66;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+        
+        /* 子分类样式 */
+        .subcategory-section {
+            margin-bottom: 30px;
+        }
+        
+        .subcategory-title {
+            font-size: 1.3rem;
+            color: #ff6699;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ffccdd;
+        }
+        
+        /* 搜索功能 */
+        .search-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #ffccdd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #ff6699;
+        }
+        
+        .search-button {
+            background-color: #ff6699;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .search-button:hover {
+            background-color: #ff3366;
+        }
+        
+        .search-results {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-results-title {
+            color: #ff6699;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .highlight {
+            background-color: #ffffcc;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
         footer {
             text-align: center;
             margin-top: 40px;
@@ -358,8 +595,13 @@
                 grid-template-columns: repeat(2, 1fr); /* 平板双列布局 */
             }
             
-            .meal-nav {
+            .main-nav, .meal-nav {
                 gap: 10px;
+            }
+            
+            .main-tab {
+                padding: 12px 24px;
+                font-size: 1.1rem;
             }
             
             .meal-tab {
@@ -376,6 +618,12 @@
                 flex: 1;
                 min-width: 45%;
             }
+            
+            .medicine-section, .encyclopedia-section {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
         }
         
         /* 桌面样式 (宽度大于 1024px) */
@@ -391,15 +639,21 @@
             .drink-item {
                 min-width: 200px;
             }
+            
+            .medicine-section, .encyclopedia-section {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
         }
         
         /* 打印样式 */
         @media print {
-            .meal-nav, footer, .back-to-top {
+            .main-nav, .meal-nav, footer, .back-to-top, .search-container {
                 display: none;
             }
             
-            .meal-section {
+            .main-section, .medicine-section, .encyclopedia-section {
                 display: block !important;
                 page-break-inside: avoid;
             }
@@ -422,6 +676,11 @@
             .food-name {
                 font-size: 0.9rem;
             }
+            
+            .main-tab {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
         }
         
         /* 防止移动端横屏时字体过大 */
@@ -434,7 +693,7 @@
                 font-size: 1.5rem;
             }
             
-            .meal-nav {
+            .main-nav {
                 margin-top: 10px;
             }
         }
@@ -443,10 +702,23 @@
 <body>
     <header>
         <div class="container">
-            <h1><i class="fas fa-baby"></i> 孕期健康饮食指南</h1>
-            <p class="subtitle">科学搭配，营养均衡。遵循"长胎不长肉"原则，为您提供一日三餐及加餐的健康饮食建议。</p>
+            <h1><i class="fas fa-home"></i> 孕期健康与家庭管理指南</h1>
+            <p class="subtitle">一站式孕期饮食、家庭用药与生活百科知识，帮助您和家人健康生活</p>
             
-            <div class="meal-nav">
+            <div class="main-nav">
+                <div class="main-tab active" data-section="diet">
+                    <i class="fas fa-utensils"></i> 孕期健康饮食
+                </div>
+                <div class="main-tab" data-section="medicine">
+                    <i class="fas fa-pills"></i> 家庭应急药物
+                </div>
+                <div class="main-tab" data-section="encyclopedia">
+                    <i class="fas fa-book-open"></i> 家庭百科全书
+                </div>
+            </div>
+            
+            <!-- 餐时导航 - 仅在孕期饮食部分显示 -->
+            <div class="meal-nav" id="mealNav">
                 <div class="meal-tab active" data-meal="breakfast">早餐 9:00</div>
                 <div class="meal-tab" data-meal="snack-am">上午加餐 11:00</div>
                 <div class="meal-tab" data-meal="lunch">午餐 13:30</div>
@@ -457,346 +729,1103 @@
     </header>
     
     <div class="container">
-        <!-- 早餐部分 -->
-        <section id="breakfast" class="meal-section active">
-            <div class="section-title">
-                <i class="fas fa-sun"></i>
-                <h2>早餐 9:00</h2>
-            </div>
-            
-            <p class="select-instruction">请从以下选项中选择一样作为早餐主食：</p>
-            
-            <div class="meal-categories">
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-egg"></i> 蛋类/蛋白质
+        <!-- 搜索功能 -->
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索饮食、药物、生活百科...">
+            <button class="search-button" id="searchButton">
+                <i class="fas fa-search"></i> 搜索
+            </button>
+        </div>
+        
+        <!-- 搜索结果 -->
+        <div class="search-results" id="searchResults">
+            <h3 class="search-results-title">搜索结果</h3>
+            <div id="searchResultsContent"></div>
+        </div>
+        
+        <!-- 孕期健康饮食部分 -->
+        <section id="diet" class="main-section active">
+            <!-- 早餐部分 -->
+            <section id="breakfast" class="meal-section active">
+                <div class="section-title">
+                    <i class="fas fa-sun"></i>
+                    <h2>早餐 9:00</h2>
+                </div>
+                
+                <p class="select-instruction">请从以下选项中选择一样作为早餐主食：</p>
+                
+                <div class="meal-categories">
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-egg"></i> 蛋类/蛋白质
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-egg"></i></div>
+                                    <div class="food-name">水煮蛋（鸡蛋或者鹅蛋）</div>
+                                </div>
+                                <div class="food-portion">1个</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-egg"></i></div>
+                                    <div class="food-name">鸡蛋羹</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-egg"></i></div>
+                                    <div class="food-name">鹌鹑蛋</div>
+                                </div>
+                                <div class="food-portion">6个</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-fish"></i></div>
+                                    <div class="food-name">白灼虾</div>
+                                </div>
+                                <div class="food-portion">4只</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-egg"></i></div>
-                                <div class="food-name">水煮蛋（鸡蛋或者鹅蛋）</div>
-                            </div>
-                            <div class="food-portion">1个</div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-bread-slice"></i> 主食类
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-egg"></i></div>
-                                <div class="food-name">鸡蛋羹</div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">全麦面包</div>
+                                </div>
+                                <div class="food-portion">2片</div>
                             </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-egg"></i></div>
-                                <div class="food-name">鹌鹑蛋</div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-corn"></i></div>
+                                    <div class="food-name">甜玉米</div>
+                                </div>
+                                <div class="food-portion">200g</div>
                             </div>
-                            <div class="food-portion">6个</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-fish"></i></div>
-                                <div class="food-name">白灼虾</div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">紫薯</div>
+                                </div>
+                                <div class="food-portion">160g</div>
                             </div>
-                            <div class="food-portion">4只</div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-dumpling"></i></div>
+                                    <div class="food-name">蔬菜蒸饺</div>
+                                </div>
+                                <div class="food-portion">6个</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
+                                    <div class="food-name">无糖燕麦</div>
+                                </div>
+                                <div class="food-portion">50g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
+                                    <div class="food-name">荞麦面</div>
+                                </div>
+                                <div class="food-portion">50g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">无糖杂粮馒头</div>
+                                </div>
+                                <div class="food-portion">80g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">菜包子</div>
+                                </div>
+                                <div class="food-portion">80g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-potato"></i></div>
+                                    <div class="food-name">蒸土豆</div>
+                                </div>
+                                <div class="food-portion">200g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bowl-food"></i></div>
+                                    <div class="food-name">杂粮粥</div>
+                                </div>
+                                <div class="food-portion">杂粮150g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-root-vegetable"></i></div>
+                                    <div class="food-name">山药</div>
+                                </div>
+                                <div class="food-portion">300g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">红薯</div>
+                                </div>
+                                <div class="food-portion">180g</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-bread-slice"></i> 主食类
+                <div class="drinks-section">
+                    <div class="drinks-title">
+                        <i class="fas fa-glass-whiskey"></i> 饮品（任选一种）
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">全麦面包</div>
-                            </div>
-                            <div class="food-portion">2片</div>
+                    <div class="drink-items">
+                        <div class="drink-item">
+                            <i class="fas fa-wine-bottle"></i> 牛奶
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-corn"></i></div>
-                                <div class="food-name">甜玉米</div>
-                            </div>
-                            <div class="food-portion">200g</div>
+                        <div class="drink-item">
+                            <i class="fas fa-wine-bottle"></i> 无糖酸奶 150ml
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">紫薯</div>
-                            </div>
-                            <div class="food-portion">160g</div>
+                        <div class="drink-item">
+                            <i class="fas fa-wine-bottle"></i> 脱脂牛奶 250ml
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-dumpling"></i></div>
-                                <div class="food-name">蔬菜蒸饺</div>
-                            </div>
-                            <div class="food-portion">6个</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
-                                <div class="food-name">无糖燕麦</div>
-                            </div>
-                            <div class="food-portion">50g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
-                                <div class="food-name">荞麦面</div>
-                            </div>
-                            <div class="food-portion">50g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">无糖杂粮馒头</div>
-                            </div>
-                            <div class="food-portion">80g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">菜包子</div>
-                            </div>
-                            <div class="food-portion">80g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-potato"></i></div>
-                                <div class="food-name">蒸土豆</div>
-                            </div>
-                            <div class="food-portion">200g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bowl-food"></i></div>
-                                <div class="food-name">杂粮粥</div>
-                            </div>
-                            <div class="food-portion">杂粮150g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-root-vegetable"></i></div>
-                                <div class="food-name">山药</div>
-                            </div>
-                            <div class="food-portion">300g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">红薯</div>
-                            </div>
-                            <div class="food-portion">180g</div>
+                        <div class="drink-item">
+                            <i class="fas fa-wine-bottle"></i> 无糖豆浆 250ml
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
             
-            <div class="drinks-section">
-                <div class="drinks-title">
-                    <i class="fas fa-glass-whiskey"></i> 饮品（任选一种）
+            <!-- 上午加餐部分 -->
+            <section id="snack-am" class="meal-section">
+                <div class="section-title">
+                    <i class="fas fa-coffee"></i>
+                    <h2>上午加餐 11:00</h2>
                 </div>
-                <div class="drink-items">
-                    <div class="drink-item">
-                        <i class="fas fa-wine-bottle"></i> 牛奶
+                
+                <p class="select-instruction">请从以下选项中选择一样作为上午加餐：</p>
+                <div class="portion-tip">
+                    <i class="fas fa-info-circle"></i> 可以选多种，总量150g ~ 180g
+                </div>
+                
+                <div class="meal-categories">
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-seedling"></i> 坚果类
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">原味坚果</div>
+                                </div>
+                                <div class="food-portion">20g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">核桃</div>
+                                </div>
+                                <div class="food-portion">2颗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">腰果</div>
+                                </div>
+                                <div class="food-portion">5颗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">花生</div>
+                                </div>
+                                <div class="food-portion">5颗</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="drink-item">
-                        <i class="fas fa-wine-bottle"></i> 无糖酸奶 150ml
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-cookie"></i> 轻食类
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cookie"></i></div>
+                                    <div class="food-name">无糖苏打饼干</div>
+                                </div>
+                                <div class="food-portion">25g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">全麦面包</div>
+                                </div>
+                                <div class="food-portion">1片</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-dumpling"></i></div>
+                                    <div class="food-name">蔬菜蒸饺</div>
+                                </div>
+                                <div class="food-portion">3个</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
+                                    <div class="food-name">无糖燕麦</div>
+                                </div>
+                                <div class="food-portion">30g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">无糖杂粮馒头</div>
+                                </div>
+                                <div class="food-portion">40g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">菜包子</div>
+                                </div>
+                                <div class="food-portion">40g</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="drink-item">
-                        <i class="fas fa-wine-bottle"></i> 脱脂牛奶 250ml
-                    </div>
-                    <div class="drink-item">
-                        <i class="fas fa-wine-bottle"></i> 无糖豆浆 250ml
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-apple-alt"></i> 水果类
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cherry"></i></div>
+                                    <div class="food-name">车厘子</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-strawberry"></i></div>
+                                    <div class="food-name">草莓</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-tomato"></i></div>
+                                    <div class="food-name">西红柿</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-orange"></i></div>
+                                    <div class="food-name">橙子</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-grapes"></i></div>
+                                    <div class="food-name">蓝莓</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-lemon"></i></div>
+                                    <div class="food-name">柚子</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-apple-alt"></i></div>
+                                    <div class="food-name">苹果</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-kiwi-bird"></i></div>
+                                    <div class="food-name">猕猴桃</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-dragon"></i></div>
+                                    <div class="food-name">火龙果</div>
+                                </div>
+                                <div class="food-portion">减量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-grapes"></i></div>
+                                    <div class="food-name">葡萄</div>
+                                </div>
+                                <div class="food-portion">减量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-banana"></i></div>
+                                    <div class="food-name">香蕉</div>
+                                </div>
+                                <div class="food-portion">减量</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                
+                <div class="notes-section">
+                    <div class="notes-title">
+                        <i class="fas fa-exclamation-circle"></i> 注意事项
+                    </div>
+                    <ul class="notes-list">
+                        <li>低糖水果均可选择，总重量100g</li>
+                        <li>加餐应适量，避免影响正餐食欲</li>
+                        <li>坚果类富含健康脂肪，有助于胎儿大脑发育</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 午餐部分 -->
+            <section id="lunch" class="meal-section">
+                <div class="section-title">
+                    <i class="fas fa-sun"></i>
+                    <h2>午餐 13:30</h2>
+                </div>
+                
+                <p class="select-instruction">请从以下每类中各选一样：肉菜、素菜、主食</p>
+                
+                <div class="meal-categories">
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-drumstick-bite"></i> 肉菜（选一样）
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-fish"></i></div>
+                                    <div class="food-name">清蒸鱼</div>
+                                </div>
+                                <div class="food-portion">鱼120g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-shrimp"></i></div>
+                                    <div class="food-name">西兰花炒虾仁</div>
+                                </div>
+                                <div class="food-portion">虾仁80g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bacon"></i></div>
+                                    <div class="food-name">蒸排骨</div>
+                                </div>
+                                <div class="food-portion">排骨120g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-steak"></i></div>
+                                    <div class="food-name">煎牛排</div>
+                                </div>
+                                <div class="food-portion">牛排100g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cow"></i></div>
+                                    <div class="food-name">辣椒炒牛肉</div>
+                                </div>
+                                <div class="food-portion">牛肉100g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-shrimp"></i></div>
+                                    <div class="food-name">白灼虾</div>
+                                </div>
+                                <div class="food-portion">虾带壳100g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-fish"></i></div>
+                                    <div class="food-name">西芹炒鱿鱼</div>
+                                </div>
+                                <div class="food-portion">鱿鱼120g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-drumstick-bite"></i></div>
+                                    <div class="food-name">香菇蒸鸡</div>
+                                </div>
+                                <div class="food-portion">鸡肉100g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cheese"></i></div>
+                                    <div class="food-name">辣椒豆腐</div>
+                                </div>
+                                <div class="food-portion">豆腐200g</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-leaf"></i> 素菜（选一样）
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒菠菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒芦笋</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒油麦菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒空心菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒菜心</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒番薯叶</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒生菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒芥菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒鸡毛菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-bowl-food"></i> 主食（选一样）
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-rice"></i></div>
+                                    <div class="food-name">杂粮饭</div>
+                                </div>
+                                <div class="food-portion">0.8碗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-rice"></i></div>
+                                    <div class="food-name">黑米饭</div>
+                                </div>
+                                <div class="food-portion">0.8碗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-rice"></i></div>
+                                    <div class="food-name">燕麦饭</div>
+                                </div>
+                                <div class="food-portion">0.8碗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-noodles"></i></div>
+                                    <div class="food-name">荞麦面</div>
+                                </div>
+                                <div class="food-portion">80g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-dumpling"></i></div>
+                                    <div class="food-name">蔬菜饺</div>
+                                </div>
+                                <div class="food-portion">10个</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notes-section">
+                    <div class="notes-title">
+                        <i class="fas fa-exclamation-circle"></i> 午餐注意事项
+                    </div>
+                    <ul class="notes-list">
+                        <li>午餐用油10g，盐2.5g</li>
+                        <li>油可以选：亚麻籽油、玉米油、菜籽油、芝麻油、橄榄油</li>
+                        <li>午餐应营养均衡，保证蛋白质、蔬菜和主食的合理搭配</li>
+                        <li>烹饪方式以蒸、煮、快炒为主，避免油炸</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 下午加餐部分 -->
+            <section id="snack-pm" class="meal-section">
+                <div class="section-title">
+                    <i class="fas fa-coffee"></i>
+                    <h2>下午加餐 15:30</h2>
+                </div>
+                
+                <p class="select-instruction">请从以下选项中选择一样作为下午加餐：</p>
+                
+                <div class="meal-categories">
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-seedling"></i> 坚果类
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">原味坚果</div>
+                                </div>
+                                <div class="food-portion">20g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">核桃</div>
+                                </div>
+                                <div class="food-portion">2颗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">腰果</div>
+                                </div>
+                                <div class="food-portion">5颗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">花生</div>
+                                </div>
+                                <div class="food-portion">5颗</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-cookie"></i> 轻食类
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cookie"></i></div>
+                                    <div class="food-name">无糖苏打饼干</div>
+                                </div>
+                                <div class="food-portion">25g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">全麦面包</div>
+                                </div>
+                                <div class="food-portion">1片</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-dumpling"></i></div>
+                                    <div class="food-name">蔬菜蒸饺</div>
+                                </div>
+                                <div class="food-portion">3个</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
+                                    <div class="food-name">无糖燕麦</div>
+                                </div>
+                                <div class="food-portion">30g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">无糖杂粮馒头</div>
+                                </div>
+                                <div class="food-portion">40g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+                                    <div class="food-name">菜包子</div>
+                                </div>
+                                <div class="food-portion">40g</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-utensils"></i> 主食类
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-corn"></i></div>
+                                    <div class="food-name">甜玉米</div>
+                                </div>
+                                <div class="food-portion">100g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                                    <div class="food-name">紫薯</div>
+                                </div>
+                                <div class="food-portion">80g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-root-vegetable"></i></div>
+                                    <div class="food-name">山药</div>
+                                </div>
+                                <div class="food-portion">50g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notes-section">
+                    <div class="notes-title">
+                        <i class="fas fa-exclamation-circle"></i> 注意事项
+                    </div>
+                    <ul class="notes-list">
+                        <li>低糖水果均可选择，总重量100g</li>
+                        <li>加餐应适量，避免影响晚餐食欲</li>
+                        <li>坚果类富含健康脂肪，有助于胎儿大脑发育</li>
+                        <li>下午加餐有助于稳定血糖，避免晚餐前过度饥饿</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 晚餐部分 -->
+            <section id="dinner" class="meal-section">
+                <div class="section-title">
+                    <i class="fas fa-moon"></i>
+                    <h2>晚餐 18:30</h2>
+                </div>
+                
+                <p class="select-instruction">请从以下每类中各选一样：肉菜、素菜、主食</p>
+                
+                <div class="meal-categories">
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-drumstick-bite"></i> 肉菜（选一样）
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">芹菜炒香干</div>
+                                </div>
+                                <div class="food-portion">香干80g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-pepper-hot"></i></div>
+                                    <div class="food-name">彩椒炒虾仁</div>
+                                </div>
+                                <div class="food-portion">虾仁70g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">香葱炒豆皮</div>
+                                </div>
+                                <div class="food-portion">豆皮80g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cheese"></i></div>
+                                    <div class="food-name">香汁嫩豆腐</div>
+                                </div>
+                                <div class="food-portion">豆腐150g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cheese"></i></div>
+                                    <div class="food-name">辣椒炒豆腐</div>
+                                </div>
+                                <div class="food-portion">豆腐150g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-shrimp"></i></div>
+                                    <div class="food-name">芦笋炒虾仁</div>
+                                </div>
+                                <div class="food-portion">虾仁70g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-fish"></i></div>
+                                    <div class="food-name">尖椒炒花甲</div>
+                                </div>
+                                <div class="food-portion">花甲带壳180g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-drumstick-bite"></i></div>
+                                    <div class="food-name">蒸鸡腿肉</div>
+                                </div>
+                                <div class="food-portion">鸡腿肉100g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-fish"></i></div>
+                                    <div class="food-name">清蒸鲍鱼</div>
+                                </div>
+                                <div class="food-portion">鲍鱼带壳180g</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-leaf"></i> 素菜（选一样）
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒菠菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒芦笋</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒油麦菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒空心菜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒莴笋</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒西芹</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-cucumber"></i></div>
+                                    <div class="food-name">炒青瓜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒冬瓜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                                    <div class="food-name">炒丝瓜</div>
+                                </div>
+                                <div class="food-portion">适量</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-header">
+                            <i class="fas fa-bowl-food"></i> 主食（选一样）
+                        </div>
+                        <div class="category-content">
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-rice"></i></div>
+                                    <div class="food-name">杂粮饭</div>
+                                </div>
+                                <div class="food-portion">0.7碗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-rice"></i></div>
+                                    <div class="food-name">黑米饭</div>
+                                </div>
+                                <div class="food-portion">0.7碗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-rice"></i></div>
+                                    <div class="food-name">燕麦饭</div>
+                                </div>
+                                <div class="food-portion">0.7碗</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-noodles"></i></div>
+                                    <div class="food-name">荞麦面</div>
+                                </div>
+                                <div class="food-portion">70g</div>
+                            </div>
+                            <div class="food-item">
+                                <div class="food-info">
+                                    <div class="food-icon"><i class="fas fa-dumpling"></i></div>
+                                    <div class="food-name">蔬菜饺</div>
+                                </div>
+                                <div class="food-portion">8个</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notes-section">
+                    <div class="notes-title">
+                        <i class="fas fa-exclamation-circle"></i> 晚餐注意事项
+                    </div>
+                    <ul class="notes-list">
+                        <li>晚餐用油10g，盐2.5g</li>
+                        <li>晚餐应清淡易消化，避免过多油脂和盐分</li>
+                        <li>晚餐时间不宜过晚，建议在睡前3-4小时完成</li>
+                        <li>晚餐后可以适当散步，有助于消化和睡眠</li>
+                    </ul>
+                </div>
+            </section>
         </section>
         
-        <!-- 上午加餐部分 -->
-        <section id="snack-am" class="meal-section">
+        <!-- 家庭应急药物部分 -->
+        <section id="medicine" class="main-section">
             <div class="section-title">
-                <i class="fas fa-coffee"></i>
-                <h2>上午加餐 11:00</h2>
+                <i class="fas fa-pills"></i>
+                <h2>家庭应急药物及说明</h2>
             </div>
             
-            <p class="select-instruction">请从以下选项中选择一样作为上午加餐：</p>
-            <div class="portion-tip">
-                <i class="fas fa-info-circle"></i> 可以选多种，总量150g ~ 180g
-            </div>
+            <p class="select-instruction">家庭常备药品清单及使用说明，请在医生指导下使用：</p>
             
-            <div class="meal-categories">
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-seedling"></i> 坚果类
+            <div class="subcategory-section">
+                <h3 class="subcategory-title"><i class="fas fa-thermometer"></i> 退烧止痛类</h3>
+                <div class="medicine-section">
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-temperature-high"></i> 对乙酰氨基酚（扑热息痛）
+                        </div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 退烧、缓解轻中度疼痛（头痛、牙痛、肌肉痛等）。</p>
+                            <p><strong>用法用量：</strong> 成人一次0.3-0.6g，一日3-4次，24小时内不超过2g。</p>
+                            <p><strong>注意事项：</strong> 避免长期或大剂量使用，肝功能不全者慎用。</p>
+                            <p><strong>适用人群：</strong> 成人、儿童（按体重计算剂量）。</p>
+                            <div class="medicine-warning">
+                                <strong><i class="fas fa-exclamation-triangle"></i> 孕期注意：</strong> 孕期相对安全，但应避免长期使用。
+                            </div>
+                        </div>
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">原味坚果</div>
-                            </div>
-                            <div class="food-portion">20g</div>
+                    
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-pain-relief"></i> 布洛芬
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">核桃</div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 退烧、缓解轻中度疼痛、抗炎。</p>
+                            <p><strong>用法用量：</strong> 成人一次0.2-0.4g，每4-6小时一次，24小时内不超过1.2g。</p>
+                            <p><strong>注意事项：</strong> 胃肠道不适者饭后服用，避免与阿司匹林同用。</p>
+                            <p><strong>适用人群：</strong> 成人、儿童（按体重计算剂量）。</p>
+                            <div class="medicine-warning">
+                                <strong><i class="fas fa-exclamation-triangle"></i> 禁忌：</strong> 孕妇（尤其是孕晚期）、哺乳期妇女、胃溃疡患者禁用。
                             </div>
-                            <div class="food-portion">2颗</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">腰果</div>
-                            </div>
-                            <div class="food-portion">5颗</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">花生</div>
-                            </div>
-                            <div class="food-portion">5颗</div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-cookie"></i> 轻食类
+            </div>
+            
+            <div class="subcategory-section">
+                <h3 class="subcategory-title"><i class="fas fa-allergies"></i> 抗过敏类</h3>
+                <div class="medicine-section">
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-sneeze"></i> 氯雷他定
+                        </div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 缓解过敏性鼻炎、荨麻疹等过敏症状。</p>
+                            <p><strong>用法用量：</strong> 成人及12岁以上儿童一次10mg，一日1次。</p>
+                            <p><strong>注意事项：</strong> 肝功能不全者需调整剂量，避免与酮康唑、红霉素等同用。</p>
+                            <p><strong>适用人群：</strong> 成人、12岁以上儿童。</p>
+                            <div class="medicine-warning">
+                                <strong><i class="fas fa-exclamation-triangle"></i> 孕期注意：</strong> 仅在必要时使用，避免在孕早期使用。
+                            </div>
+                        </div>
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cookie"></i></div>
-                                <div class="food-name">无糖苏打饼干</div>
-                            </div>
-                            <div class="food-portion">25g</div>
+                    
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-itch"></i> 西替利嗪
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">全麦面包</div>
-                            </div>
-                            <div class="food-portion">1片</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-dumpling"></i></div>
-                                <div class="food-name">蔬菜蒸饺</div>
-                            </div>
-                            <div class="food-portion">3个</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
-                                <div class="food-name">无糖燕麦</div>
-                            </div>
-                            <div class="food-portion">30g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">无糖杂粮馒头</div>
-                            </div>
-                            <div class="food-portion">40g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">菜包子</div>
-                            </div>
-                            <div class="food-portion">40g</div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 缓解季节性过敏性鼻炎、慢性荨麻疹等过敏症状。</p>
+                            <p><strong>用法用量：</strong> 成人及6岁以上儿童一次10mg，一日1次。</p>
+                            <p><strong>注意事项：</strong> 肾功能不全者需调整剂量，可能引起嗜睡。</p>
+                            <p><strong>适用人群：</strong> 成人、6岁以上儿童。</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-apple-alt"></i> 水果类
+            </div>
+            
+            <div class="subcategory-section">
+                <h3 class="subcategory-title"><i class="fas fa-stomach"></i> 消化系统用药</h3>
+                <div class="medicine-section">
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-heartburn"></i> 铝碳酸镁（达喜）
+                        </div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 缓解胃酸过多引起的胃痛、胃灼热、反酸。</p>
+                            <p><strong>用法用量：</strong> 一次1-2片，一日3-4次，餐后1-2小时服用。</p>
+                            <p><strong>注意事项：</strong> 不宜长期使用，避免与铁剂同时服用。</p>
+                            <p><strong>适用人群：</strong> 成人、12岁以上儿童。</p>
+                        </div>
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cherry"></i></div>
-                                <div class="food-name">车厘子</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                    
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-probiotics"></i> 蒙脱石散（思密达）
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-strawberry"></i></div>
-                                <div class="food-name">草莓</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 成人及儿童急、慢性腹泻。</p>
+                            <p><strong>用法用量：</strong> 成人一次1袋，一日3次；儿童酌减。</p>
+                            <p><strong>注意事项：</strong> 与其他药物间隔1-2小时服用，过量可能引起便秘。</p>
+                            <p><strong>适用人群：</strong> 全年龄段（包括婴幼儿）。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-tomato"></i></div>
-                                <div class="food-name">西红柿</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                    </div>
+                    
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-bacteria"></i> 益生菌制剂
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-orange"></i></div>
-                                <div class="food-name">橙子</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 调节肠道菌群，改善腹泻、便秘等消化问题。</p>
+                            <p><strong>常用产品：</strong> 双歧杆菌、乳酸菌素片、妈咪爱等。</p>
+                            <p><strong>用法用量：</strong> 按说明书指导使用。</p>
+                            <p><strong>注意事项：</strong> 温水送服，避免与抗生素同时服用（如需同用应间隔2小时）。</p>
+                            <p><strong>适用人群：</strong> 全年龄段（包括婴幼儿）。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-grapes"></i></div>
-                                <div class="food-name">蓝莓</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subcategory-section">
+                <h3 class="subcategory-title"><i class="fas fa-band-aid"></i> 外用药品</h3>
+                <div class="medicine-section">
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-spray-can"></i> 碘伏消毒液
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-lemon"></i></div>
-                                <div class="food-name">柚子</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 皮肤消毒，处理小伤口、擦伤。</p>
+                            <p><strong>用法：</strong> 直接涂抹于伤口及周围皮肤。</p>
+                            <p><strong>注意事项：</strong> 避免接触眼睛，对碘过敏者禁用。</p>
+                            <p><strong>适用人群：</strong> 全年龄段。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-apple-alt"></i></div>
-                                <div class="food-name">苹果</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                    </div>
+                    
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-ointment"></i> 炉甘石洗剂
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-kiwi-bird"></i></div>
-                                <div class="food-name">猕猴桃</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 缓解皮肤瘙痒、轻度皮疹、痱子、蚊虫叮咬等。</p>
+                            <p><strong>用法：</strong> 使用前摇匀，局部涂抹，一日2-3次。</p>
+                            <p><strong>注意事项：</strong> 避免用于眼睛、口腔等黏膜部位，有破损皮肤慎用。</p>
+                            <p><strong>适用人群：</strong> 全年龄段（包括婴幼儿）。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-dragon"></i></div>
-                                <div class="food-name">火龙果</div>
-                            </div>
-                            <div class="food-portion">减量</div>
+                    </div>
+                    
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-prescription"></i> 莫匹罗星软膏（百多邦）
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-grapes"></i></div>
-                                <div class="food-name">葡萄</div>
-                            </div>
-                            <div class="food-portion">减量</div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 治疗细菌性皮肤感染，如毛囊炎、小面积创伤感染。</p>
+                            <p><strong>用法：</strong> 局部涂抹，一日2-3次。</p>
+                            <p><strong>注意事项：</strong> 仅限外用，避免接触眼睛，疗程一般不超过10天。</p>
+                            <p><strong>适用人群：</strong> 成人、儿童（2岁以上）。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-banana"></i></div>
-                                <div class="food-name">香蕉</div>
-                            </div>
-                            <div class="food-portion">减量</div>
+                    </div>
+                    
+                    <div class="medicine-card">
+                        <div class="medicine-header">
+                            <i class="fas fa-burn"></i> 烫伤膏
+                        </div>
+                        <div class="medicine-content">
+                            <p><strong>用途：</strong> 轻度烫伤、烧伤的紧急处理。</p>
+                            <p><strong>用法：</strong> 清洁伤口后涂抹，覆盖纱布。</p>
+                            <p><strong>注意事项：</strong> 仅适用于轻度烫伤，严重烫伤需立即就医。</p>
+                            <p><strong>适用人群：</strong> 全年龄段。</p>
                         </div>
                     </div>
                 </div>
@@ -804,207 +1833,203 @@
             
             <div class="notes-section">
                 <div class="notes-title">
-                    <i class="fas fa-exclamation-circle"></i> 注意事项
+                    <i class="fas fa-exclamation-circle"></i> 家庭药箱管理原则
                 </div>
                 <ul class="notes-list">
-                    <li>低糖水果均可选择，总重量100g</li>
-                    <li>加餐应适量，避免影响正餐食欲</li>
-                    <li>坚果类富含健康脂肪，有助于胎儿大脑发育</li>
+                    <li><strong>咨询医生：</strong> 使用任何药物前都应咨询医生或药师</li>
+                    <li><strong>阅读说明书：</strong> 仔细阅读药品说明书，注意禁忌症和不良反应</li>
+                    <li><strong>分门别类：</strong> 内服药与外用药分开存放，儿童不易触及</li>
+                    <li><strong>定期检查：</strong> 每3-6个月检查药品有效期，及时清理过期药品</li>
+                    <li><strong>应急联系：</strong> 保存好急救电话和医生联系方式</li>
+                    <li><strong>记录过敏史：</strong> 明确记录家庭成员药物过敏史</li>
+                    <li><strong>特殊人群：</strong> 儿童、孕妇、老年人用药需特别谨慎</li>
                 </ul>
             </div>
         </section>
         
-        <!-- 午餐部分 -->
-        <section id="lunch" class="meal-section">
+        <!-- 家庭百科全书部分 -->
+        <section id="encyclopedia" class="main-section">
             <div class="section-title">
-                <i class="fas fa-sun"></i>
-                <h2>午餐 13:30</h2>
+                <i class="fas fa-book-open"></i>
+                <h2>家庭百科全书知识</h2>
             </div>
             
-            <p class="select-instruction">请从以下每类中各选一样：肉菜、素菜、主食</p>
+            <p class="select-instruction">家庭生活、健康、育儿相关知识，帮助您更好地管理家庭生活：</p>
             
-            <div class="meal-categories">
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-drumstick-bite"></i> 肉菜（选一样）
+            <div class="subcategory-section">
+                <h3 class="subcategory-title"><i class="fas fa-baby"></i> 孕期与育儿知识</h3>
+                <div class="encyclopedia-section">
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-baby-carriage"></i> 孕期注意事项
+                        </div>
+                        <div class="encyclopedia-content">
+                            <p><strong>孕期三个阶段重点：</strong></p>
+                            <p><strong>孕早期（1-12周）：</strong> 胎儿器官形成关键期，补充叶酸，避免接触有害物质。</p>
+                            <p><strong>孕中期（13-27周）：</strong> 相对稳定期，注意均衡营养，适当运动，开始胎教。</p>
+                            <p><strong>孕晚期（28-40周）：</strong> 胎儿快速生长期，注意体重控制，学习分娩知识。</p>
+                            <div class="encyclopedia-tip">
+                                <strong><i class="fas fa-lightbulb"></i> 重要提示：</strong> 定期产检，监测血压、血糖、体重变化，及时与医生沟通任何异常。
+                            </div>
+                        </div>
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-fish"></i></div>
-                                <div class="food-name">清蒸鱼</div>
-                            </div>
-                            <div class="food-portion">鱼120g</div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-baby"></i> 新生儿护理要点
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-shrimp"></i></div>
-                                <div class="food-name">西兰花炒虾仁</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>喂养：</strong> 母乳喂养是最佳选择，按需哺乳，注意正确衔乳姿势。</p>
+                            <p><strong>睡眠：</strong> 新生儿每天睡眠16-20小时，建立昼夜节律，确保睡眠环境安全。</p>
+                            <p><strong>沐浴：</strong> 每天或隔天洗澡，水温37-38℃，使用婴儿专用洗浴用品。</p>
+                            <p><strong>脐带护理：</strong> 保持干燥清洁，每日用75%酒精消毒，观察有无红肿、渗液。</p>
+                            <p><strong>黄疸监测：</strong> 生理性黄疸通常2周内消退，如持续不退或加重应及时就医。</p>
+                            <div class="encyclopedia-tip">
+                                <strong><i class="fas fa-lightbulb"></i> 安全提示：</strong> 婴儿床避免柔软 bedding，不与父母同床睡，不使用定型枕。
                             </div>
-                            <div class="food-portion">虾仁80g</div>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bacon"></i></div>
-                                <div class="food-name">蒸排骨</div>
-                            </div>
-                            <div class="food-portion">排骨120g</div>
+                    </div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-child"></i> 婴幼儿常见问题处理
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-steak"></i></div>
-                                <div class="food-name">煎牛排</div>
-                            </div>
-                            <div class="food-portion">牛排100g</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>发烧：</strong> 体温超过38.5℃需退烧处理，物理降温为主，必要时使用退烧药。</p>
+                            <p><strong>腹泻：</strong> 注意补充水分防止脱水，可使用蒙脱石散，严重时及时就医。</p>
+                            <p><strong>便秘：</strong> 增加膳食纤维摄入，适当按摩腹部，必要时使用开塞露。</p>
+                            <p><strong>湿疹：</strong> 保持皮肤清洁滋润，避免刺激性物质，严重时使用医生处方的药膏。</p>
+                            <p><strong>疫苗接种：</strong> 按计划接种疫苗，注意观察接种后反应，有异常及时就医。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cow"></i></div>
-                                <div class="food-name">辣椒炒牛肉</div>
-                            </div>
-                            <div class="food-portion">牛肉100g</div>
+                    </div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-apple-alt"></i> 儿童营养指南
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-shrimp"></i></div>
-                                <div class="food-name">白灼虾</div>
-                            </div>
-                            <div class="food-portion">虾带壳100g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-fish"></i></div>
-                                <div class="food-name">西芹炒鱿鱼</div>
-                            </div>
-                            <div class="food-portion">鱿鱼120g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-drumstick-bite"></i></div>
-                                <div class="food-name">香菇蒸鸡</div>
-                            </div>
-                            <div class="food-portion">鸡肉100g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cheese"></i></div>
-                                <div class="food-name">辣椒豆腐</div>
-                            </div>
-                            <div class="food-portion">豆腐200g</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>0-6个月：</strong> 纯母乳喂养，按需哺乳。</p>
+                            <p><strong>6-12个月：</strong> 逐步添加辅食，从单一到多样，从稀到稠。</p>
+                            <p><strong>1-3岁：</strong> 三餐两点，保证奶量，食物多样化。</p>
+                            <p><strong>3-6岁：</strong> 均衡饮食，培养良好饮食习惯，控制零食。</p>
+                            <p><strong>关键营养素：</strong> 蛋白质、钙、铁、锌、维生素D等对儿童生长发育至关重要。</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-leaf"></i> 素菜（选一样）
+            </div>
+            
+            <div class="subcategory-section">
+                <h3 class="subcategory-title"><i class="fas fa-home"></i> 家庭健康与急救</h3>
+                <div class="encyclopedia-section">
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-first-aid"></i> 家庭急救常识
+                        </div>
+                        <div class="encyclopedia-content">
+                            <p><strong>烫伤处理：</strong> 立即用冷水冲洗15-20分钟，不要涂抹牙膏、酱油等，用干净纱布覆盖。</p>
+                            <p><strong>割伤处理：</strong> 清洁伤口，压迫止血，使用创可贴或无菌纱布包扎。</p>
+                            <p><strong>扭伤处理：</strong> 休息、冰敷、压迫、抬高（RICE原则）。</p>
+                            <p><strong>窒息处理：</strong> 海姆立克急救法（针对成人和儿童不同手法）。</p>
+                            <p><strong>中毒处理：</strong> 立即拨打急救电话，保留毒物样本，不要随意催吐。</p>
+                            <div class="encyclopedia-tip">
+                                <strong><i class="fas fa-lightbulb"></i> 重要：</strong> 学习基本急救技能，家中备有急救包，定期检查补充。
+                            </div>
+                        </div>
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒菠菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-heartbeat"></i> 常见疾病家庭护理
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒芦笋</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>感冒：</strong> 多休息、多喝水，对症处理，一般7-10天自愈。</p>
+                            <p><strong>发热：</strong> 体温超过38.5℃使用退烧药，物理降温，观察精神状态。</p>
+                            <p><strong>腹泻：</strong> 注意补充水分和电解质，饮食清淡，避免油腻。</p>
+                            <p><strong>咳嗽：</strong> 多喝水，保持空气湿润，必要时使用止咳药。</p>
+                            <p><strong>过敏：</strong> 避免接触过敏原，使用抗过敏药物，严重时及时就医。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒油麦菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                    </div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-seedling"></i> 健康生活方式
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒空心菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>均衡饮食：</strong> 食物多样化，适量摄入蛋白质、碳水化合物、脂肪。</p>
+                            <p><strong>适量运动：</strong> 每周至少150分钟中等强度运动，如快走、游泳、瑜伽。</p>
+                            <p><strong>充足睡眠：</strong> 成人每天7-9小时，儿童和青少年需要更多。</p>
+                            <p><strong>压力管理：</strong> 学习放松技巧，保持积极心态，必要时寻求帮助。</p>
+                            <p><strong>定期体检：</strong> 每年至少一次全面体检，及时发现健康问题。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒菜心</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                    </div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-shield-alt"></i> 家庭安全知识
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒番薯叶</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒生菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒芥菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒鸡毛菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>防火安全：</strong> 安装烟雾报警器，制定家庭逃生计划，定期检查电器。</p>
+                            <p><strong>防跌倒：</strong> 保持地面干燥整洁，安装扶手，使用防滑垫。</p>
+                            <p><strong>儿童安全：</strong> 安装防护栏、安全门，妥善保管药品和危险品。</p>
+                            <p><strong>食品安全：</strong> 生熟分开，彻底加热，注意食物保存期限。</p>
+                            <p><strong>网络安全：</strong> 保护个人信息，谨慎对待网络信息，教育儿童网络安全。</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-bowl-food"></i> 主食（选一样）
+            </div>
+            
+            <div class="subcategory-section">
+                <h3 class="subcategory-title"><i class="fas fa-users"></i> 家庭关系与心理健康</h3>
+                <div class="encyclopedia-section">
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-heart"></i> 夫妻关系维护
+                        </div>
+                        <div class="encyclopedia-content">
+                            <p><strong>有效沟通：</strong> 倾听对方，表达感受，避免指责和批评。</p>
+                            <p><strong>共同成长：</strong> 一起学习新技能，共同参与家庭活动。</p>
+                            <p><strong>解决冲突：</strong> 冷静处理分歧，寻求共识，必要时寻求专业帮助。</p>
+                            <p><strong>保持亲密：</strong> 定期安排二人时间，保持身体和情感上的亲密。</p>
+                            <p><strong>支持彼此：</strong> 在对方困难时给予支持，共同面对生活挑战。</p>
+                        </div>
                     </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-rice"></i></div>
-                                <div class="food-name">杂粮饭</div>
-                            </div>
-                            <div class="food-portion">0.8碗</div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-hands-helping"></i> 亲子关系建立
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-rice"></i></div>
-                                <div class="food-name">黑米饭</div>
-                            </div>
-                            <div class="food-portion">0.8碗</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>高质量陪伴：</strong> 每天至少30分钟专心陪伴孩子，参与他们的活动。</p>
+                            <p><strong>积极倾听：</strong> 认真听孩子说话，理解他们的感受和需求。</p>
+                            <p><strong>设立界限：</strong> 明确家庭规则，保持一致性，温和而坚定。</p>
+                            <p><strong>鼓励独立：</strong> 适当让孩子自己做决定，培养责任感和独立性。</p>
+                            <p><strong>表达爱意：</strong> 经常告诉孩子你爱他们，通过行动和言语表达关爱。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-rice"></i></div>
-                                <div class="food-name">燕麦饭</div>
-                            </div>
-                            <div class="food-portion">0.8碗</div>
+                    </div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-brain"></i> 心理健康维护
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-noodles"></i></div>
-                                <div class="food-name">荞麦面</div>
-                            </div>
-                            <div class="food-portion">80g</div>
+                        <div class="encyclopedia-content">
+                            <p><strong>识别压力信号：</strong> 失眠、食欲改变、易怒、疲劳可能是压力过大的表现。</p>
+                            <p><strong>放松技巧：</strong> 深呼吸、冥想、渐进式肌肉放松等有助于缓解压力。</p>
+                            <p><strong>社交支持：</strong> 与家人朋友保持联系，分享感受，寻求支持。</p>
+                            <p><strong>专业帮助：</strong> 当情绪问题影响日常生活时，应及时寻求专业心理咨询。</p>
+                            <p><strong>自我关怀：</strong> 照顾自己的身心健康，给自己休息和恢复的时间。</p>
                         </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-dumpling"></i></div>
-                                <div class="food-name">蔬菜饺</div>
-                            </div>
-                            <div class="food-portion">10个</div>
+                    </div>
+                    
+                    <div class="encyclopedia-card">
+                        <div class="encyclopedia-header">
+                            <i class="fas fa-balance-scale"></i> 家庭财务管理
+                        </div>
+                        <div class="encyclopedia-content">
+                            <p><strong>制定预算：</strong> 记录收入和支出，制定合理的家庭预算。</p>
+                            <p><strong>应急基金：</strong> 储备3-6个月的生活费用作为应急基金。</p>
+                            <p><strong>理性消费：</strong> 区分需要和想要，避免冲动消费。</p>
+                            <p><strong>保险规划：</strong> 根据家庭情况配置合适的保险（医疗、意外、寿险等）。</p>
+                            <p><strong>长期规划：</strong> 为教育、养老等长期目标做好财务规划。</p>
                         </div>
                     </div>
                 </div>
@@ -1012,368 +2037,23 @@
             
             <div class="notes-section">
                 <div class="notes-title">
-                    <i class="fas fa-exclamation-circle"></i> 午餐注意事项
+                    <i class="fas fa-exclamation-circle"></i> 紧急情况处理
                 </div>
                 <ul class="notes-list">
-                    <li>午餐用油10g，盐2.5g</li>
-                    <li>油可以选：亚麻籽油、玉米油、菜籽油、芝麻油、橄榄油</li>
-                    <li>午餐应营养均衡，保证蛋白质、蔬菜和主食的合理搭配</li>
-                    <li>烹饪方式以蒸、煮、快炒为主，避免油炸</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- 下午加餐部分 -->
-        <section id="snack-pm" class="meal-section">
-            <div class="section-title">
-                <i class="fas fa-coffee"></i>
-                <h2>下午加餐 15:30</h2>
-            </div>
-            
-            <p class="select-instruction">请从以下选项中选择一样作为下午加餐：</p>
-            
-            <div class="meal-categories">
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-seedling"></i> 坚果类
-                    </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">原味坚果</div>
-                            </div>
-                            <div class="food-portion">20g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">核桃</div>
-                            </div>
-                            <div class="food-portion">2颗</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">腰果</div>
-                            </div>
-                            <div class="food-portion">5颗</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">花生</div>
-                            </div>
-                            <div class="food-portion">5颗</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-cookie"></i> 轻食类
-                    </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cookie"></i></div>
-                                <div class="food-name">无糖苏打饼干</div>
-                            </div>
-                            <div class="food-portion">25g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">全麦面包</div>
-                            </div>
-                            <div class="food-portion">1片</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-dumpling"></i></div>
-                                <div class="food-name">蔬菜蒸饺</div>
-                            </div>
-                            <div class="food-portion">3个</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-wheat-awn"></i></div>
-                                <div class="food-name">无糖燕麦</div>
-                            </div>
-                            <div class="food-portion">30g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">无糖杂粮馒头</div>
-                            </div>
-                            <div class="food-portion">40g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
-                                <div class="food-name">菜包子</div>
-                            </div>
-                            <div class="food-portion">40g</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-utensils"></i> 主食类
-                    </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-corn"></i></div>
-                                <div class="food-name">甜玉米</div>
-                            </div>
-                            <div class="food-portion">100g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-seedling"></i></div>
-                                <div class="food-name">紫薯</div>
-                            </div>
-                            <div class="food-portion">80g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-root-vegetable"></i></div>
-                                <div class="food-name">山药</div>
-                            </div>
-                            <div class="food-portion">50g</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="notes-section">
-                <div class="notes-title">
-                    <i class="fas fa-exclamation-circle"></i> 注意事项
-                </div>
-                <ul class="notes-list">
-                    <li>低糖水果均可选择，总重量100g</li>
-                    <li>加餐应适量，避免影响晚餐食欲</li>
-                    <li>坚果类富含健康脂肪，有助于胎儿大脑发育</li>
-                    <li>下午加餐有助于稳定血糖，避免晚餐前过度饥饿</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- 晚餐部分 -->
-        <section id="dinner" class="meal-section">
-            <div class="section-title">
-                <i class="fas fa-moon"></i>
-                <h2>晚餐 18:30</h2>
-            </div>
-            
-            <p class="select-instruction">请从以下每类中各选一样：肉菜、素菜、主食</p>
-            
-            <div class="meal-categories">
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-drumstick-bite"></i> 肉菜（选一样）
-                    </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">芹菜炒香干</div>
-                            </div>
-                            <div class="food-portion">香干80g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-pepper-hot"></i></div>
-                                <div class="food-name">彩椒炒虾仁</div>
-                            </div>
-                            <div class="food-portion">虾仁70g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">香葱炒豆皮</div>
-                            </div>
-                            <div class="food-portion">豆皮80g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cheese"></i></div>
-                                <div class="food-name">香汁嫩豆腐</div>
-                            </div>
-                            <div class="food-portion">豆腐150g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cheese"></i></div>
-                                <div class="food-name">辣椒炒豆腐</div>
-                            </div>
-                            <div class="food-portion">豆腐150g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-shrimp"></i></div>
-                                <div class="food-name">芦笋炒虾仁</div>
-                            </div>
-                            <div class="food-portion">虾仁70g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-fish"></i></div>
-                                <div class="food-name">尖椒炒花甲</div>
-                            </div>
-                            <div class="food-portion">花甲带壳180g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-drumstick-bite"></i></div>
-                                <div class="food-name">蒸鸡腿肉</div>
-                            </div>
-                            <div class="food-portion">鸡腿肉100g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-fish"></i></div>
-                                <div class="food-name">清蒸鲍鱼</div>
-                            </div>
-                            <div class="food-portion">鲍鱼带壳180g</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-leaf"></i> 素菜（选一样）
-                    </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒菠菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒芦笋</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒油麦菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒空心菜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒莴笋</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒西芹</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-cucumber"></i></div>
-                                <div class="food-name">炒青瓜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒冬瓜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="food-name">炒丝瓜</div>
-                            </div>
-                            <div class="food-portion">适量</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-bowl-food"></i> 主食（选一样）
-                    </div>
-                    <div class="category-content">
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-rice"></i></div>
-                                <div class="food-name">杂粮饭</div>
-                            </div>
-                            <div class="food-portion">0.7碗</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-rice"></i></div>
-                                <div class="food-name">黑米饭</div>
-                            </div>
-                            <div class="food-portion">0.7碗</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-rice"></i></div>
-                                <div class="food-name">燕麦饭</div>
-                            </div>
-                            <div class="food-portion">0.7碗</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-noodles"></i></div>
-                                <div class="food-name">荞麦面</div>
-                            </div>
-                            <div class="food-portion">70g</div>
-                        </div>
-                        <div class="food-item">
-                            <div class="food-info">
-                                <div class="food-icon"><i class="fas fa-dumpling"></i></div>
-                                <div class="food-name">蔬菜饺</div>
-                            </div>
-                            <div class="food-portion">8个</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="notes-section">
-                <div class="notes-title">
-                    <i class="fas fa-exclamation-circle"></i> 晚餐注意事项
-                </div>
-                <ul class="notes-list">
-                    <li>晚餐用油10g，盐2.5g</li>
-                    <li>晚餐应清淡易消化，避免过多油脂和盐分</li>
-                    <li>晚餐时间不宜过晚，建议在睡前3-4小时完成</li>
-                    <li>晚餐后可以适当散步，有助于消化和睡眠</li>
+                    <li><strong>呼吸困难：</strong> 立即拨打急救电话，保持患者舒适体位</li>
+                    <li><strong>严重出血：</strong> 直接压迫伤口，抬高受伤部位，立即就医</li>
+                    <li><strong>意识丧失：</strong> 检查呼吸和脉搏，必要时进行心肺复苏，立即呼叫急救</li>
+                    <li><strong>严重过敏反应：</strong> 如有肾上腺素笔立即使用，拨打急救电话</li>
+                    <li><strong>中毒：</strong> 立即拨打急救电话，保留毒物样本，不要随意催吐</li>
+                    <li><strong>心脏病发作：</strong> 让患者坐下休息，立即拨打急救电话，如有阿司匹林可咀嚼一片</li>
                 </ul>
             </div>
         </section>
         
         <footer>
-            <p>孕期饮食建议：遵循"长胎不长肉"原则，合理搭配三餐和加餐，保证营养均衡的同时控制体重合理增长。</p>
-            <p class="footer-highlight">建议每日饮水1500-2000ml，少量多次，避免一次性大量饮水</p>
+            <p>孕期健康与家庭管理指南 - 为您提供全面的孕期饮食、家庭用药与生活百科知识</p>
+            <p class="footer-highlight">建议每日饮水1500-2000ml，少量多次，保持健康生活方式</p>
+            <p class="footer-highlight">本指南仅供参考，具体医疗问题请咨询专业医生，紧急情况请立即就医</p>
         </footer>
     </div>
     
@@ -1383,15 +2063,66 @@
     </div>
 
     <script>
-        // 切换餐时选项卡
-        document.querySelectorAll('.meal-tab').forEach(tab => {
+        // 主分类切换
+        document.querySelectorAll('.main-tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 // 移除所有选项卡的active类
-                document.querySelectorAll('.meal-tab').forEach(t => {
+                document.querySelectorAll('.main-tab').forEach(t => {
                     t.classList.remove('active');
                 });
                 
                 // 添加当前选项卡的active类
+                this.classList.add('active');
+                
+                // 获取选项卡对应的分类
+                const section = this.getAttribute('data-section');
+                
+                // 隐藏所有分类部分
+                document.querySelectorAll('.main-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // 显示对应分类部分
+                document.getElementById(section).classList.add('active');
+                
+                // 控制餐时导航的显示
+                const mealNav = document.getElementById('mealNav');
+                if (section === 'diet') {
+                    mealNav.classList.add('active');
+                    // 重置餐时导航到第一个
+                    document.querySelectorAll('.meal-tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    document.querySelector('.meal-tab').classList.add('active');
+                    // 显示第一个餐时
+                    document.querySelectorAll('.meal-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.querySelector('.meal-section').classList.add('active');
+                } else {
+                    mealNav.classList.remove('active');
+                }
+                
+                // 滚动到顶部（移动端优化）
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 餐时切换 - 仅在孕期饮食部分有效
+        document.querySelectorAll('.meal-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 只在孕期饮食部分有效
+                if (!document.getElementById('diet').classList.contains('active')) return;
+                
+                // 移除所有餐时选项卡的active类
+                document.querySelectorAll('.meal-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // 添加当前餐时选项卡的active类
                 this.classList.add('active');
                 
                 // 获取选项卡对应的餐时
@@ -1459,6 +2190,16 @@
             });
         });
         
+        // 为药物和百科卡片添加点击效果
+        document.querySelectorAll('.medicine-card, .encyclopedia-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'translateY(-3px)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+        
         // 移动端显示提示函数
         function showMobileToast(message) {
             // 检查是否已有提示框
@@ -1505,6 +2246,152 @@
             }, 2000);
         }
         
+        // 搜索功能实现
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const searchResults = document.getElementById('searchResults');
+        const searchResultsContent = document.getElementById('searchResultsContent');
+        
+        // 搜索数据 - 扩展了更多内容
+        const searchData = [
+            // 饮食相关
+            { title: "水煮蛋", content: "早餐蛋类选择，提供优质蛋白质", category: "孕期饮食", section: "diet", subcategory: "早餐" },
+            { title: "全麦面包", content: "早餐主食选择，富含膳食纤维", category: "孕期饮食", section: "diet", subcategory: "早餐" },
+            { title: "牛奶", content: "早餐饮品选择，提供钙质", category: "孕期饮食", section: "diet", subcategory: "早餐" },
+            { title: "清蒸鱼", content: "午餐肉菜选择，富含优质蛋白质和DHA", category: "孕期饮食", section: "diet", subcategory: "午餐" },
+            { title: "杂粮饭", content: "午餐主食选择，控制血糖", category: "孕期饮食", section: "diet", subcategory: "午餐" },
+            { title: "核桃", content: "加餐坚果选择，富含omega-3脂肪酸", category: "孕期饮食", section: "diet", subcategory: "加餐" },
+            { title: "苹果", content: "加餐水果选择，低糖富含纤维", category: "孕期饮食", section: "diet", subcategory: "加餐" },
+            
+            // 药物相关
+            { title: "对乙酰氨基酚", content: "退烧止痛药，孕期相对安全", category: "家庭应急药物", section: "medicine", subcategory: "退烧止痛类" },
+            { title: "布洛芬", content: "退烧止痛抗炎药，孕妇禁用", category: "家庭应急药物", section: "medicine", subcategory: "退烧止痛类" },
+            { title: "氯雷他定", content: "抗过敏药，缓解过敏性鼻炎、荨麻疹", category: "家庭应急药物", section: "medicine", subcategory: "抗过敏类" },
+            { title: "铝碳酸镁", content: "缓解胃酸过多引起的胃痛、胃灼热", category: "家庭应急药物", section: "medicine", subcategory: "消化系统用药" },
+            { title: "蒙脱石散", content: "止泻药，全年龄段适用", category: "家庭应急药物", section: "medicine", subcategory: "消化系统用药" },
+            { title: "碘伏", content: "皮肤消毒，处理小伤口", category: "家庭应急药物", section: "medicine", subcategory: "外用药品" },
+            { title: "炉甘石洗剂", content: "缓解皮肤瘙痒、轻度皮疹、蚊虫叮咬", category: "家庭应急药物", section: "medicine", subcategory: "外用药品" },
+            
+            // 百科相关
+            { title: "孕期注意事项", content: "孕早、中、晚期各阶段重点", category: "家庭百科全书", section: "encyclopedia", subcategory: "孕期与育儿知识" },
+            { title: "新生儿护理", content: "喂养、睡眠、沐浴、脐带护理要点", category: "家庭百科全书", section: "encyclopedia", subcategory: "孕期与育儿知识" },
+            { title: "儿童营养", content: "各年龄段儿童营养指南", category: "家庭百科全书", section: "encyclopedia", subcategory: "孕期与育儿知识" },
+            { title: "家庭急救", content: "烫伤、割伤、扭伤、窒息等急救处理", category: "家庭百科全书", section: "encyclopedia", subcategory: "家庭健康与急救" },
+            { title: "健康生活方式", content: "均衡饮食、适量运动、充足睡眠", category: "家庭百科全书", section: "encyclopedia", subcategory: "家庭健康与急救" },
+            { title: "夫妻关系", content: "有效沟通、共同成长、解决冲突", category: "家庭百科全书", section: "encyclopedia", subcategory: "家庭关系与心理健康" },
+            { title: "亲子关系", content: "高质量陪伴、积极倾听、设立界限", category: "家庭百科全书", section: "encyclopedia", subcategory: "家庭关系与心理健康" },
+            { title: "心理健康", content: "识别压力信号、放松技巧、社交支持", category: "家庭百科全书", section: "encyclopedia", subcategory: "家庭关系与心理健康" },
+            { title: "紧急情况处理", content: "呼吸困难、严重出血、意识丧失等紧急处理", category: "家庭百科全书", section: "encyclopedia", subcategory: "紧急情况" }
+        ];
+        
+        // 搜索函数
+        function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            
+            if (query === '') {
+                searchResults.classList.remove('active');
+                return;
+            }
+            
+            // 清空之前的结果
+            searchResultsContent.innerHTML = '';
+            
+            // 筛选匹配的结果
+            const results = searchData.filter(item => {
+                return item.title.toLowerCase().includes(query) || 
+                       item.content.toLowerCase().includes(query) ||
+                       item.category.toLowerCase().includes(query) ||
+                       item.subcategory.toLowerCase().includes(query);
+            });
+            
+            if (results.length === 0) {
+                searchResultsContent.innerHTML = '<p>未找到相关结果，请尝试其他关键词。</p>';
+            } else {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    
+                    // 高亮显示搜索关键词
+                    let highlightedTitle = result.title;
+                    let highlightedContent = result.content;
+                    
+                    if (query.length > 0) {
+                        const regex = new RegExp(`(${query})`, 'gi');
+                        highlightedTitle = result.title.replace(regex, '<span class="highlight">$1</span>');
+                        highlightedContent = result.content.replace(regex, '<span class="highlight">$1</span>');
+                    }
+                    
+                    resultItem.innerHTML = `
+                        <h4>${highlightedTitle}</h4>
+                        <p>${highlightedContent}</p>
+                        <p><small>分类：${result.category} | 子类：${result.subcategory} | <a href="#" class="goto-section" data-section="${result.section}">前往查看</a></small></p>
+                    `;
+                    
+                    searchResultsContent.appendChild(resultItem);
+                });
+                
+                // 添加前往查看功能
+                document.querySelectorAll('.goto-section').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const sectionId = this.getAttribute('data-section');
+                        
+                        // 切换对应的主分类
+                        document.querySelectorAll('.main-tab').forEach(tab => {
+                            tab.classList.remove('active');
+                            if (tab.getAttribute('data-section') === sectionId) {
+                                tab.classList.add('active');
+                            }
+                        });
+                        
+                        // 显示对应的主分类部分
+                        document.querySelectorAll('.main-section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById(sectionId).classList.add('active');
+                        
+                        // 控制餐时导航的显示
+                        const mealNav = document.getElementById('mealNav');
+                        if (sectionId === 'diet') {
+                            mealNav.classList.add('active');
+                        } else {
+                            mealNav.classList.remove('active');
+                        }
+                        
+                        // 隐藏搜索结果
+                        searchResults.classList.remove('active');
+                        
+                        // 滚动到顶部
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            }
+            
+            searchResults.classList.add('active');
+        }
+        
+        // 搜索按钮点击事件
+        searchButton.addEventListener('click', performSearch);
+        
+        // 搜索框回车事件
+        searchInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        // 点击页面其他区域关闭搜索结果
+        document.addEventListener('click', function(event) {
+            if (!searchResults.contains(event.target) && 
+                !searchInput.contains(event.target) && 
+                !searchButton.contains(event.target)) {
+                searchResults.classList.remove('active');
+            }
+        });
+        
         // 返回顶部按钮功能
         const backToTopBtn = document.getElementById('backToTop');
         
@@ -1527,12 +2414,17 @@
         
         // 页面加载后显示欢迎信息
         window.addEventListener('DOMContentLoaded', function() {
-            console.log('孕期健康饮食指南已加载完成，祝您和宝宝健康！');
+            console.log('孕期健康与家庭管理指南已加载完成，祝您和家人健康！');
             
-            // 随机选择一个餐时作为今日重点推荐
-            const meals = ['早餐', '午餐', '晚餐'];
-            const randomMeal = meals[Math.floor(Math.random() * meals.length)];
-            console.log(`今日重点推荐：${randomMeal} - 请确保${randomMeal}营养均衡，满足胎儿发育需求。`);
+            // 显示今天的日期
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('zh-CN', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                weekday: 'long'
+            });
+            console.log(`今天是：${dateStr}`);
             
             // 检测是否为移动设备
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -1548,10 +2440,17 @@
         
         // 打印友好功能
         window.addEventListener('beforeprint', function() {
-            // 在打印前将所有餐时部分展开
-            document.querySelectorAll('.meal-section').forEach(section => {
+            // 在打印前将所有分类部分展开
+            document.querySelectorAll('.main-section').forEach(section => {
                 section.classList.add('active');
             });
+            
+            // 展开所有餐时部分
+            if (document.getElementById('diet').classList.contains('active')) {
+                document.querySelectorAll('.meal-section').forEach(section => {
+                    section.classList.add('active');
+                });
+            }
         });
         
         // 防止移动端双击缩放
